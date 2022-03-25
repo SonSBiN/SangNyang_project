@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>상냥이 mbti 테스트</title>
+        <meta name="description" content="나랑 꼭 닮은 상냥이를 mbti를 기반으로 추천해주는 테스트입니다."/>
+        <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous"/>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    
+    
+    <body class="container">
+        <article class="start">
+            <img id ="main" src="main.png" alt="My Image" width="300vh" height="300vh">
+            <h1 id = "blank" class = "mt-5"></h1>
+            <button id ="cssbutton" type="button" class="btn btn-primary" onclick="start();">MBTI 시작하기</button>
+            <button id ="cssbutton" type="button" class="btn btn-primary" onclick="cat();">상냥이 구경하기</button>
+            <img id ="logo" src="logo.png" alt="My Image" width="30%" height="10%">
+        </article>
+        <article class="catwrap">
+            <button id = "cssbutton" type="button" class="btn btn-primary" onclick="restart()">되돌아가기</button>
+            <section class="cat">
+                <img id="catphoto" src="batch/batch_ENFJ 그레이씨.jpg">
+                <img id="catphoto" src="batch/batch_ENFP 양말.jpg">
+                <img id="catphoto" src="batch/batch_ENTJ 지기.jpg">
+                <img id="catphoto" src="batch/batch_ENTP 요정.jpg">
+                <img id="catphoto" src="batch/batch_ESFJ 맹이.jpg">
+                <img id="catphoto" src="batch/batch_ESFP 보리.jpg">
+                <img id="catphoto" src="batch/batch_ESTJ 체다.jpg">
+                <img id="catphoto" src="batch/batch_ESTP 턱스.jpg">
+                <img id="catphoto" src="batch/batch_INFJ 연두.jpg">
+                <img id="catphoto" src="batch/batch_INFP 귀리.jpg">
+                <img id="catphoto" src="batch/batch_INTJ 머쓱이.jpg">
+                <img id="catphoto" src="batch/batch_INTP 몽땅꼬리.jpg">
+                <img id="catphoto" src="batch/batch_ISFJ 요비.jpg">
+                <img id="catphoto" src="batch/batch_ISFP 미요.jpg">
+                <img id="catphoto" src="batch/batch_ISTJ 요둥.jpeg">
+                <img id="catphoto" src="batch/batch_ISTP 맨발.jpg">
+
+                </section>
+        </article>
+        <article class="question">
+            <h2 id="title" class="text-center">문제</h2>
+            <input id="type" type="hidden" value="EI" />
+            <img id="ques_img" class="mt-5" src="1번.jpg" alt="question img"/>
+            <button id="A" type="button" class="btn btn-warning mt-5">Warning</button>
+            <button id="B" type="button" class="btn btn-warning mt-3">Warning</button>
+            <div class="progress mt-5">
+                <div class="progress-bar bg-warning" 
+                role="progressbar" 
+                style="width: calc(100/12*1%)"
+                aria-valuenow="25" 
+                aria-valuemin="0" 
+                aria-valuemax="100"></div>
+            </div>
+            <h6 id = "qnum" class ="mb-5">1번문항</h6>
+            <div class="float-wrap">
+                <img id="logoimg" class="mt-5" src="likelion_logo.jpg" alt="lion_logo"/>
+                <img id="clogoimg" class="rounded-circle" src="cat_logo.jpg" alt="cat_logo"/>
+            </div>
+            
+        </article>
+
+        <article class="result">
+            <img id="img" class="rounded-circle mt-5" src="cat.jpg" alt="animal">
+            <h5 id="smbti" class="text-center mt-3" 동물이름>당신의 상냥이 mbti는...</h5> <!--고정-->
+            <h3 id="cat" class="text-center">고양이 이름</h3>
+            <h5 id="ong" class="text-center">입니다옹~</h5> <!--고정-->
+            <h5 id="explain" class="text-center mt-5">설명</h5>
+            <div class="addthis_inline_share_toolbox_94j8"></div>
+            <!-- <h5 id="madeby" class="text-center mt-5">Made by. Like Lion 10기_상냥행 5팀</h5> -->
+            <button id="C" type="button" class="btn btn-warning mt-5" onclick="retest()">다시 해볼래 냥?</button>
+            <h5 id="madeby" class="text-center">Made by. Like Lion 10기_상냥행 5팀</h5>
+
+
+        </article>
+
+        <script type="text/javascript" scr="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+        
+        <input type="hidden" id="EI" value="0"/>
+        <input type="hidden" id="SN" value="0"/>
+        <input type="hidden" id="TF" value="0"/>
+        <input type="hidden" id="JP" value="0"/>
+
+        <script>
+            var num=1;
+            var type;
+            var preValue;
+            var q={
+                1:{
+                    "ques_img":"1번.jpg",
+                    title:"Q.화요일, 목요일, 토요일에 약속이 잡힌 상황! 그런데 친구가 수요일에 밥사줄테니 나오라고 했다면?", 
+                    type:"EI", 
+                    A:"당연히 놀러나간다옹. 노는건 많이 놀수록 좋다냥.", 
+                    B:"3일 연속으로 노는건 힘들것같다냥.. 다음에 사달라고 한다옹"},
+                2:{
+                    "ques_img":"2번.jpg",
+                    title:"Q.시험기간동안 내내 공부만한 당신 주말에는 어떤 약속을 잡으실건가옹?", 
+                    type:"EI", 
+                    A:"그동안 쌓인 스트레스를 친구들과 밤새도록 놀면서 푼다냥!", 
+                    B:"집에서 그동안 못잤던 잠도 자고 유튜브도 보고 영화도 보면서 심신의 안정을 취해옹."},
+                3:{
+                    "ques_img":"3번.jpg",
+                    title:"Q.조별과제중 교수님이 발표하는사람은 추가점수를 준다고 한다냥. 당신의 선택은?", 
+                    type:"EI", 
+                    A:"발표를 하고싶다고 조원들에게 어필한다냥!", 
+                    B:"최대한 발표를 안하려고 사람들과 눈도 안마주치고 말도 안한다옹.."},
+                4:{
+                    "ques_img":"4번.jpg",
+                    title:"Q.친구와 같이 상명대 언덕을 오르다가 친구가 상명대에 케이블카 설치하면 어떻겠냐고 진지하게 물어본다옹. 당신의 대답은?", 
+                    type:"SN", 
+                    A:"무슨 소리애옹. 케이블카 값이 얼만데.", 
+                    B:"어 괜찮은데냥?  누가 건의 안 하나옹?"},
+                5:{
+                    "ques_img":"5번.jpg",
+                    title:"Q.교수님이 수업시간에 꼭 외우라고 한 공식이 이해가 안가옹. 당신의 반응은?", 
+                    type:"SN", 
+                    A:"어? 이거 공식 틀리신 것 같아옹.  일단 외우고 이따가 질문해야겠다냥.", 
+                    B:"왜 이게 이거애옹? 이건 이렇게 해서 이거 아닌가냥? 교수님이 잘못하신 건가옹? 아닌데 교수님이 잘못하실리가 없는데옹..? 질문해야하나옹? 일단 외워야 하나옹?"},
+                6:{
+                    "ques_img":"6번.jpg",
+                    title:"Q.당신은 상명대 언덕을 오르고 있다옹. 어떤 생각이 드나옹?", 
+                    type:"SN", 
+                    A:"하 너무 힘들다옹 진짜 수업 늦겠어옹", 
+                    B:"아 진짜 너무 높다옹...이거 잘못하면 넘어져서 구르는 거 아니냥? 그럼 이번 수업 어떡하지...나 에타에 오르는 거 아니냥?"},
+                7:{
+                    "ques_img":"7번.jpg",
+                    title:"Q.이웃 냥이가 집사한테 끼부려서 새로운 캣타워를 얻었다고 자랑해옹. 당신의 대답은?", 
+                    type:"TF", 
+                    A:"무슨 캣타워?", 
+                    B:"좋겠냥.. 나도 놀러가도 돼냥..?"},
+                8:{
+                    "ques_img":"8번.jpg",
+                    title:"Q.나 오늘 우울해서 꽃 샀어옹.", 
+                    type:"TF", 
+                    A:"우울한데 왜 꽃을 사냥?", 
+                    B:"아궁.. 우울했구나옹.."},
+                9:{
+                    "ques_img":"9번.jpg",
+                    title:"Q.이웃 냥이가 목이 아프다고 한다옹.",
+                    type:"TF", 
+                    A:"목이 왜 아프지옹?? (목이 아픈 이유에는 … 검색)", 
+                    B:"헉 괜찮아옹?? 약 먹었냥??"},
+                10:{
+                    "ques_img":"10번.jpg",
+                    title:"Q.한달 남은 과제. 슴우는 언제 시작하냐옹?", 
+                    type:"JP", A:"지금부터 일정대로 차근차근 할꺼다냥~ ", 
+                    B:"마감 두 시간 전 시작. 알 수 없는 자신감이 솟구친다옹."},
+                11:{
+                    "ques_img":"11번.jpg",
+                    title:"Q.수업이 끝나니 배가 고프다. 밥 먹으러 어디가지?", 
+                    type:"JP", A:"미리 정리한 맛집리스트 중 거리와 평점을 고려해서 방문!", 
+                    B:"언덕을 내려갈까옹 올라갈까옹? 끌리는 곳에 들어가야지옹~"},
+                12:{
+                    "ques_img":"12번.jpg",
+                    title:"Q.시험이 끝났다옹. 친구랑 어떻게 만나지옹?", 
+                    type:"JP", 
+                    A:"미리 잡힌 스케줄 대로 22일 17시 경복궁역 체부동에 가서 만두 먹겠어옹! ", 
+                    B:"오예 시험끝~ 전화해서 즉흥 약속을 잡아옹."},
+
+            };
+            var result={
+                "ISFP":{
+                "cat":"미요[ISFP]",
+                "explain":"요비와 맹이의 딸, 요정이와 닮아 미니요정을 줄인 미요가 됨.겁많은 성격의 상냥이. 산을 잘타는 프로 등산냥 (열심히 미백관 언덕을 오르는 당신! 슴우의 자격이 있다냥!)",
+                "img":"ISFP 미요.jpg",
+            },
+            "ISTP":{
+                "cat":"맨발[ISTP]",
+                "explain":"요비와 맹이의 아들, 요비와 맹이를 잘 따름. 밥보다는 집이 더 좋은 집돌냥, 의젓한 성격의 상냥이 (또래보다 어른스러운 슴우는 마더파더젠틀맨이다옹~)",
+                "img":"ISTP 맨발.jpg",
+            },
+            "ESFJ":{
+                "cat":"맹이[ESFJ]",
+                "explain":"온 캠퍼스를 누비는 맹반장, 아가냥이들을 지켜주는 용'맹이'그루밍 잘하는 깔끔냥, 부성애 강한 멋진 아빠(자기관리가 철저한 슴우! 친구도 잘 챙기는 멋진 슴우다옹~)",
+                "img":"ESFJ 맹이.jpg",
+             },
+            "ESFP":{
+                "cat":"보리[ESFP]",
+                "explain":"- 칼리의 아들, 느긋하고 의젓한 성격의 상냥이, 냥이들과도 , 혼자서도 잘 노는 인싸냥.(교수님 동기 선배 후배 모두에게 인기많은 핵인싸 슴우다냥!)",
+                "img":"ESFP 보리.jpg",
+            },
+            "INFP":{
+                "cat":"귀리[INFP]",
+                "explain":"칼리의 딸. 얌전한 성격의 상냥이. 남매인 보리와는 티격태격(매사에 차분한 슴우! 하지만 은근히 성격이 있을지도?!)",
+                "img":"INFP 귀리.jpg",
+            },
+            "ENFJ":{
+                "cat":"그레이씨[ENFJ ]",
+                "explain":"얼굴은 근엄하고 시크해 보이지만 상냥이들에게 붙임성이 좋음. 애교많은 귀염둥이 냥(슴우는 만날수록 겉바속촉인간이다냥?!?)",
+                "img":"ENFJ 그레이씨.jpg",
+            },
+            "INFJ":{
+                "cat":"연두[INFJ]",
+                "explain":"소심한 성격의 삼색냥 한때 몽당꼬리의 구애를 받음, 문예대 학생들에게 인기가 많음. (슴우..혹시 친구가 없어서 고민이애옹? 뒤에 슴우 좋아하는 사람 줄서있다냥..)",
+                "img":"INFJ 연두.jpg"
+            },
+            "ISFJ":{
+                "cat":"요비[ISFJ]",
+                "explain":"요정, 요둥과 자매 추정. 예민하고 양보심 많은 성격, 애인 맹이에겐 까칠함. 맹이, 그레이씨, 턱스에게 챙김받는 인기냥 (슴우는 따뜻한 도시고양이. 하지만 내 남자에겐 까칠하다옹!)",
+                "img":"ISFJ 요비.jpg",
+            },
+            "ESTJ":{
+                "cat":"체다[ESTJ]",
+                "explain":"강렬한 인상을 가졌지만 애교섞인 목소리, 살랑한 걸음걸이, 몽당꼬리와 티격태격(인상파 슴우 ! 목소리가 너무 좋다옹~ 두루두루 잘 지내는 슴우!)",
+                "img":"ESTJ 체다.jpg",
+            },
+            "ENTJ":{
+                "cat":"지기[ENTJ]",
+                "explain":"상파 상냥이에서 지금은 애교파 상냥이. 늘 같은 자리를 지키는 뚝심냥(지기와 같은 MBTI인 당신..알수록 귀여운 매력쟁이일지도?!?)",
+                "img":"ENTJ 지기.jpg"
+            },
+            "INTP":{
+                "cat":"몽땅꼬리[INTP]",
+                "explain":"몽땅이, 몽꼬라고도 불림. 어릴 적 다쳐 꼬리가 뭉뚝한 모습. 여냥이들에게는 젠틀냥. 혼자 조용히 밥먹기를 즐기는 혼밥파. (슴우도 고독한 미식냥이다옹. 같이 혼밥하고 싶으면 날 찾아냥!)",
+                "img":"INTP 몽땅꼬리.jpg",
+            },
+            "ENFP":{
+                "cat":"양말[ENFP]",
+                "explain":"요비와 맹이의 아들, 아빠닮아 그루밍 잘하는 깔끔냥, 밥 최고야! 밥열정맨(상냥행 공식 먹보), 겁없는 성격의 상냥이.(상명대의 어마무시한 산처럼 잘먹고 잘씻고 산도 잘타는 슴우! 양말이가 명예상냥이로 인정한다냥!)",
+                "img":"ENFP 양말.jpg",
+            },
+            "ESTP":{
+                "cat":"턱스[ESTP]",
+                "explain":"맹이, 그레이씨와 형제처럼 지냄. 자유로운 성격의 상냥이. 캠퍼스 내 희귀한 턱시도냥(독특한 복장으로 캠퍼스를 누비는 당신. 멋 쫌 아는 사람이네옹~)",
+                "img":"ESTP 턱스.jpg",
+            },
+            "ISFP":{
+                "cat":"미요[ISFP]",
+                "explain":"요비와 맹이의 딸, 요정이와 닮아 미니요정을 줄인 미요가 됨.겁많은 성격의 상냥이. 산을 잘타는 프로 등산냥 (열심히 미백관 언덕을 오르는 당신! 슴우의 자격이 있다냥!)",
+                "img":"ISFP 미요.jpg"
+            },
+            "ISTJ":{
+                "cat":"요둥[ISTJ]",
+                "explain":"요정과 자매 추정. 뒤뚱거리는 걸음걸이. 촐랑 배 소유자. 차분한 성격의 상냥이 (슴우랑 나랑 연어의 공통점은? 뱃살이 있어도 귀엽다는거다냥! 이건 애굣살이애옹~>.<)",
+                "img":"ISTJ 요둥.jpg",
+            },
+            "ENTP":{
+                "cat":"요정[ENTP]",
+                "explain":"상명대에서 지내는 고양이들과 냥우관계좋음. 캠퍼스 구석구석 누비고 다니는 발 넓은 상냥이. 냥냥펀치 암팡짐. (깔깔 웃으며 냥냥펀치를 날리는 슴우! 웃는 모습이 좋아옹 !)",
+                "img":"ENTP 요정.jpg",
+            },
+            "INTJ":{
+                "cat":"머쓱이[INTJ]",
+                "explain":"늘 머쓱해하는 듯한 표정과 몸짓. 소심한 성격의 상냥이. 그렇지만 볼일은 당당하게 보는 편 (..^^;; 슴우는 당당하다냥~^^;; 멋지다냥...^^;;)",
+                "img":"INTJ 머쓱이.jpg",
+            },     
+        };
+
+            function start(){
+                $(".start").hide();
+                $(".question").show();
+                next();
+            }
+            function cat(){
+                $(".start").hide();
+                $(".catwrap").show();
+            }
+            function restart(){
+                $(".catwrap").hide();
+                $(".start").show();
+            }
+            function retest(){
+                {
+                  $(".result").hide();
+                  $(".start").show();
+                  num=1;
+                  $("#EI").val(0);
+                  $("#SN").val(0);
+                  $("#TF").val(0);
+                  $("#JP").val(0);
+                  $(".progress-bar").attr("style","width:calc(100/12*"+num+"%)");
+                  $("#title").html(q[num]["title"]);
+                  $("#type").val(q[num]["type"]);
+                  $("#A").html(q[num]["A"]);
+                  $("#B").html(q[num]["B"]);
+                  $("#qnum").html(num+"/12"); 
+                }
+            }
+            
+
+            $("#A").click(function(){
+                type=$("#type").val();
+                preValue=$("#"+type).val();
+                $("#"+type).val(parseInt(preValue)+1);
+                next();
+            });
+            $("#B").click(function(){
+                next();
+            });
+
+            function next(){
+                if(num==13){
+                    $(".question").hide();
+                    $(".result").show();
+                    var mbti="";
+
+                    $("#EI").val() < 2 ? (mbti+="I"):(mbti+="E");
+                    $("#SN").val() < 2 ? (mbti+="N"):(mbti+="S");
+                    $("#TF").val() < 2 ? (mbti+="F"):(mbti+="T");
+                    $("#JP").val() < 2 ? (mbti+="P"):(mbti+="J");
+                    $("#img").attr("src",result[mbti]["img"]);
+                    $("#cat").html(result[mbti]["cat"]);
+                    $("#explain").html(result[mbti]["explain"]);
+                }
+                else{
+                    $("#qnum").html(num+"/12");
+                    $("#ques_img").attr("src",q[num]["ques_img"]);
+                    $(".progress-bar").attr("style","width:calc(100/12*"+num+"%)");
+                    $("#title").html(q[num]["title"]);
+                    $("#type").val(q[num]["type"]);
+                    $("#A").html(q[num]["A"]);
+                    $("#B").html(q[num]["B"]);
+                    num++;
+                } 
+            }
+            
+        </script>
+        <script type="text/javascript"
+        src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-623897f69002cee7"></script>
+    </body>
+</html>
