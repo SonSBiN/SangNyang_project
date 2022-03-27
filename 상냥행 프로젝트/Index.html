@@ -11,6 +11,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous"/>
         <link rel="stylesheet" href="style.css"/>
+        <link rel="favicon" href="favicon.ico">
+
     </head>
     
     
@@ -45,12 +47,7 @@
                 </section>
         </article>
         <article class="question">
-            <h2 id="title" class="text-center">문제</h2>
-            <input id="type" type="hidden" value="EI" />
-            <img id="ques_img" class="mt-5" src="1번.jpg" alt="question img"/>
-            <button id="A" type="button" class="btn btn-warning mt-5">Warning</button>
-            <button id="B" type="button" class="btn btn-warning mt-3">Warning</button>
-            <div class="progress mt-5">
+            <div class="progress mt-2">
                 <div class="progress-bar bg-warning" 
                 role="progressbar" 
                 style="width: calc(100/12*1%)"
@@ -58,7 +55,18 @@
                 aria-valuemin="0" 
                 aria-valuemax="100"></div>
             </div>
-            <h6 id = "qnum" class ="mb-5">1번문항</h6>
+            <h6 id = "qnum" class ="mb--7">1번문항</h6>
+            <h2 id="title" class="text-center">문제</h2>
+            <input id="type" type="hidden" value="EI" />
+            <h1 id = "blank" class = "mt-5"></h1>
+            <img id="ques_img" class="mt-5" src="1번.jpg" alt="question img" style="vertical-align: top;">
+            <button id="A" type="button" class="btn btn-warning mt-5">Warning</button>
+            <button id="B" type="button" class="btn btn-warning mt-3">Warning</button>
+            <ins class="kakao_ad_area" style="display:none;" 
+                data-ad-unit    = "DAN-wPhRl0SfdoDciSrp" 
+                data-ad-width   = "320" 
+                data-ad-height  = "50"></ins> 
+            
             <div class="float-wrap">
                 <img id="logoimg" class="mt-5" src="likelion_logo.jpg" alt="lion_logo"/>
                 <img id="clogoimg" class="rounded-circle" src="cat_logo.jpg" alt="cat_logo"/>
@@ -72,9 +80,11 @@
             <h3 id="cat" class="text-center">고양이 이름</h3>
             <h5 id="ong" class="text-center">입니다옹~</h5> <!--고정-->
             <h5 id="explain" class="text-center mt-5">설명</h5>
-            <div class="addthis_inline_share_toolbox_94j8"></div>
             <!-- <h5 id="madeby" class="text-center mt-5">Made by. Like Lion 10기_상냥행 5팀</h5> -->
-            <button id="C" type="button" class="btn btn-warning mt-5" onclick="retest()">다시 해볼래 냥?</button>
+            <button id="C" type="button" class="btn btn-warning mt-5" onclick="retest()">다시 해볼테냥?</button>
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="addthis_inline_share_toolbox mt-5"></div>
+            
             <h5 id="madeby" class="text-center">Made by. Like Lion 10기_상냥행 5팀</h5>
 
 
@@ -323,7 +333,9 @@
             }
             
         </script>
-        <script type="text/javascript"
-        src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-623897f69002cee7"></script>
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-621c770a1b381802"></script>
+        
+
     </body>
 </html>
